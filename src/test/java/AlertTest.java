@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.openqa.selenium.*;
+
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
@@ -51,6 +54,22 @@ public class AlertTest extends TestBase{
         driver.switchTo().frame("frame2");
         assertEquals(driver.findElement(By.id("sampleHeading")).getText(), "This is a samplepage");
 
+    }
+
+    @Test
+    public void searchForPeaks() {
+        driver.get("http://51.75.61.161:9102/table.php");
+
+        List<WebElement> rows = driver.findElements(By.cssSelector("tbody tr"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.cssSelector("td"));
+            if (Integer.parseInt(cells.get(3).getText()) > 4000) {
+                System.out.println("Nazwa: "+cells.get(0).getText()
+                +"; Pasmo: "+cells.get(1).getText()
+                +"; Kraj: "+cells.get(2).getText()
+                +"; Wysokość: "+cells.get(3).getText());
+            }
+        }
     }
 
 
