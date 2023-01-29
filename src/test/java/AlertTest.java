@@ -1,5 +1,7 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
@@ -46,6 +48,17 @@ public class AlertTest extends TestBase{
         driver.switchTo().alert().sendKeys("admin\tadmin");
         Thread.sleep(5000);
     }
+    @Test
+    public void shouldAcceptBasicAuthWithActions() throws InterruptedException {
+        driver.get("http://the-internet.herokuapp.com/");
+        driver.findElement(By.linkText("Basic Auth")).click();
+
+        Actions actions = new Actions(driver);
+        Thread.sleep(500);
+        actions.sendKeys("admin").sendKeys(Keys.TAB).sendKeys("admin").sendKeys(Keys.ENTER).perform();
+        Thread.sleep(5000);
+    }
+
 
     @Test
     public void iframes() {
