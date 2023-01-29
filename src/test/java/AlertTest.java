@@ -1,8 +1,11 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -70,6 +73,41 @@ public class AlertTest extends TestBase{
                 +"; Wysokość: "+cells.get(3).getText());
             }
         }
+    }
+
+    @Test
+    public void shouldAcceptDelayedAlert() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.findElement(By.id("delayed-alert")).click();
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+        assertEquals(driver.findElement(By.id("delayed-alert-label")).getText(), "OK button pressed");
+    }
+
+    @Test
+    public void progressBarShouldCompleteWithTest() {
+        driver.get("http://51.75.61.161:9102/progressbar.php");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement progressBar = driver.findElement(By.id("progressbar"));
+        wait.until(ExpectedConditions.textToBePresentInElement(progressBar, "Complete!"));
+    }
+
+    @Test
+    public void progressBarShouldCompleteWithClass() {
+        driver.get("http://51.75.61.161:9102/progressbar.php");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement progressBar = driver.findElement(By.cssSelector("#progressbar>div:last-of-type"));
+        wait.until(ExpectedConditions.attributeContains(progressBar,"class", "ui-progressbar-complete"));
+    }
+
+    @Test
+    public void progressBarShouldCompleteWithClass2(){
+        driver.get("http://51.75.61.161:9102/progressbar.php");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.findElement(By.cssSelector("#progressbar>div.ui-progressbar-complete"));
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
     }
 
 
