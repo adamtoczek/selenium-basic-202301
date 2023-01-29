@@ -41,6 +41,18 @@ public class AlertTest extends TestBase{
         Thread.sleep(5000);
     }
 
+    @Test
+    public void iframes() {
+        driver.get("https://demoqa.com/frames");
+        driver.switchTo().frame("frame1");
+        assertEquals(driver.findElement(By.id("sampleHeading")).getText(), "This is a sample page");
+
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("frame2");
+        assertEquals(driver.findElement(By.id("sampleHeading")).getText(), "This is a samplepage");
+
+    }
+
 
 
 }
