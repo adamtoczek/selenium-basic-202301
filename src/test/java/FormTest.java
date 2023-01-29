@@ -1,10 +1,10 @@
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.openqa.selenium.*;
-
+import org.openqa.selenium.support.ui.Select;
 import java.util.Arrays;
 import java.util.List;
-
+import java.io.File;
 import static org.testng.Assert.assertEquals;
 
 public class FormTest extends TestBase{
@@ -35,10 +35,23 @@ public class FormTest extends TestBase{
                 break;
             }
         }
+
+        Select country = new Select(driver.findElement(By.id("selectContinents")));
+        country.selectByValue("europe");
+
+        Select sCommands = new Select(driver.findElement(By.id("selectSeleniumCommands")));
+
+
+        List<String> commands = Arrays.asList("navigation-commands", "wait-commands");
+        for (String val : commands)
+            sCommands.selectByValue(val);
+
+        File plik = new File("src//main//resources//file.txt");
+        driver.findElement(By.id("chooseFile")).sendKeys(plik.getAbsolutePath());
+
+
         driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
         assertEquals(driver.findElement(By.id("validator-message")).getText().trim(), "Form send with success");
 
-
-        Thread.sleep(5000);
     }
 }
