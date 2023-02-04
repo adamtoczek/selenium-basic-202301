@@ -152,6 +152,8 @@ public class MyStoreSimpleTest extends TestBase{
 //
 //        homePage.clickQuickView("hommigbird t-shirt");
 //        productQuickView.changeVariant("Color", "Black").setQty(3).clickAddToCart();
+
+
     }
 
 }
