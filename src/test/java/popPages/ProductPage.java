@@ -25,21 +25,10 @@ public class ProductPage extends BasePage{
             if (variant.findElement(By.cssSelector("span.control-label")).getText().equals(variantName)) {
                 WebElement tmp = variant.findElement(By.cssSelector("select, input"));
                 if (tmp.getTagName().equals("select"))
-                    //obsluz jako select
-                {}
+                    _changeSelectVariant(variant, value);
                 else
-                    //obsluz jako input
+                // obsluga inputow
                 {}
-
-
-                WebElement dimensionWE = variant.findElement(By.cssSelector("select"));
-                Select dimension = new Select(dimensionWE);
-                dimension.selectByVisibleText("60x90cm");
-                //poczekaj az pojawi sie nowa cena
-//                try {
-//                    wait.until(ExpectedConditions.stalenessOf(currPrice));
-//                }
-//                catch (TimeoutException e) {}
                 try {
                     wait.until(c -> !driver.findElement(By.cssSelector(".current-price")).getText().equals(currPrice));
                 }
@@ -47,5 +36,10 @@ public class ProductPage extends BasePage{
                 break;
             }
         }
+    }
+
+    private void _changeSelectVariant(WebElement variant, String value) {
+        Select dropDown = new Select(variant.findElement(By.cssSelector("select")));
+        dropDown.selectByVisibleText(value);
     }
 }
