@@ -1,35 +1,36 @@
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.testng.annotations.Test;
-import popPages.BasePage;
 import popPages.HomePage;
+
+import static org.testng.Assert.assertEquals;
+import static popPages.BasePage.*;
 
 public class MyStorePopTest extends TestPopBase{
 
     @Test
-    public void myStoreHappyPath() throws InterruptedException {
+    public void myStoreHappyPath() {
 
         HomePage.open();
-        BasePage.homePage.openProductByName("THE ADVENTURE POSTER");
+        homePage.openProductByName("THE ADVENTURE POSTER");
 
-        BasePage.productPage.changeVariant("Dimmensions", "60x90cm");
-        BasePage.productPage.changeQty(3);
-        BasePage.productPage.addToCart();
-        BasePage.cartPreview.clickContinueShopping();
-        BasePage.productPage.clickStoreLogo();
+        productPage.changeVariant("Dimmensions", "60x90cm");
+        productPage.changeQty(3);
+        productPage.addToCart();
+        cartPreview.clickContinueShopping();
+        clickStoreLogo();
 
-        BasePage.homePage.previewProductByName("HUMMINGBIRD T-SHIRT");
-        BasePage.productPreview.changeVariant("Size", "L");
-        BasePage.productPreview.changeVariant("Color", "Black");
-        BasePage.productPreview.changeQTY(2);
-        BasePage.productPreview.addToCart();
-        BasePage.cartPreview.clickProceedToCheckout();
+        homePage.previewProductByName("HUMMINGBIRD T-SHIRT");
 
-        BasePage.cartPage.verifyItemsInCart(2);
+        productPreview.changeVariant("Size", "L");
+        productPreview.changeVariant("Color", "Black");
+        productPreview.changeQty(2);
+        productPreview.addToCart();
 
+        cartPreview.clickProceedToCheckout();
 
+        //assercje w metodach POP
+        cartPage.verifyItemsInCart(2);
+        //albo w tescie
+        assertEquals(cartPage.getItemsCount(), 2);
 
-
-
-        Thread.sleep(3000);
     }
 }
