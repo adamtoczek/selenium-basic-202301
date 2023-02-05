@@ -9,4 +9,8 @@ public class Mountain {
     String country;
     @CsvBindByPosition(position = 3)
     int height;
+
+    public int getHeight() {
+        return height;
+    }
 }
