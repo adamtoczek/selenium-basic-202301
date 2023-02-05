@@ -11,8 +11,4 @@ public class BasePage {
     public static ProductPreview productPreview;
     public static CartPage cartPage;
 
-    public static void clickStoreLogo() {
-        driver.findElement(By.cssSelector("#_desktop_logo a")).click();
-        homePage = new HomePage();
-    }
 }

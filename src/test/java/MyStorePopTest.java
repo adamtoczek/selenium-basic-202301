@@ -11,15 +11,15 @@ public class MyStorePopTest extends TestPopBase{
 
         HomePage.open();
         homePage.openProductByName("THE ADVENTURE POSTER");
-
+        assertEquals(productPage.getProductTitle(), "THE ADVENTURE POSTER");
         productPage.changeVariant("Dimmensions", "60x90cm");
         productPage.changeQty(3);
         productPage.addToCart();
         cartPreview.clickContinueShopping();
-        clickStoreLogo();
+        productPage.nav.clickStoreLogo();
 
         homePage.previewProductByName("HUMMINGBIRD T-SHIRT");
-
+        assertEquals(productPreview.getProductTitle(), "HUMMINGBIRD T-SHIRT");
         productPreview.changeVariant("Size", "L");
         productPreview.changeVariant("Color", "Black");
         productPreview.changeQty(2);

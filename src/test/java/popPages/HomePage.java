@@ -9,7 +9,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class HomePage extends BasePage{
-
+    public NavigationHeader nav = new NavigationHeader();
 
     public static void open() {
         driver.get("http://146.59.32.4/index.php");

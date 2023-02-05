@@ -20,7 +20,10 @@ public class CartPreview extends BasePage{
     }
 
     public void clickContinueShopping() {
-        driver.findElement(By.cssSelector(".cart-content-btn button")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebElement btn = driver.findElement(By.cssSelector(".cart-content-btn button"));
+        btn.click();
+        wait.until(ExpectedConditions.invisibilityOf(btn));
     }
 
     public void clickProceedToCheckout() {
