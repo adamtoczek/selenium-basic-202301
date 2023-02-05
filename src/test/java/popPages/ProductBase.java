@@ -16,6 +16,7 @@ public class ProductBase extends BasePage {
     protected final String productVariantsCSS = ".product-variants>div";
     protected final String variantNameCSS = "span.control-label";
     protected final String addToCartCSS = "button.add-to-cart";
+    protected final String productPriceCSS = "span[itemprop=\"price\"]";
     protected String modalCSSprefix = "";
     protected String productTitleCSS = "h1";
 
@@ -72,4 +73,7 @@ public class ProductBase extends BasePage {
         return driver.findElement(By.cssSelector(getModalCSS(productTitleCSS))).getText();
     }
 
+    public Float getPrice() {
+        return Float.valueOf(driver.findElement(By.cssSelector(getModalCSS(productPriceCSS))).getAttribute("content"));
+    }
 }
