@@ -8,5 +8,5 @@ public class Mountain {
     @CsvBindByPosition(position = 2)
     String country;
     @CsvBindByPosition(position = 3)
-    String height;
+    int height;
 }

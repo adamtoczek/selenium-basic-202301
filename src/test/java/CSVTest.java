@@ -10,6 +10,7 @@ public class CSVTest {
     public void verifyCSVread() {
         MountainReader.readFile();
         assertEquals(MountainReader.mountainList.get(0).name, "Mont Blanc");
+        assertEquals(MountainReader.mountainList.get(0).height, 4807);
     }
 
     @Test
